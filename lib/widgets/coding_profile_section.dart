@@ -12,13 +12,6 @@ class CodingProfileSection extends StatelessWidget {
       'rating': 1650,
     },
     {
-      'name': 'HackerRank',
-      'icon': Icons.psychology,
-      'color': Color(0xFF2EC866),
-      'problems': 200,
-      'rating': 5,
-    },
-    {
       'name': 'CodeChef',
       'icon': Icons.emoji_events,
       'color': Color(0xFF7B241C),
@@ -40,7 +33,7 @@ class CodingProfileSection extends StatelessWidget {
     final isMobile = screenWidth < 768;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -53,9 +46,11 @@ class CodingProfileSection extends StatelessWidget {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Section Header
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 'Competitive Programming',
@@ -65,7 +60,7 @@ class CodingProfileSection extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -94,7 +89,7 @@ class CodingProfileSection extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
               SizedBox(
                 width: isMobile ? double.infinity : 600,
                 child: const Text(
@@ -110,63 +105,73 @@ class CodingProfileSection extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 80),
+          const SizedBox(height: 30),
 
-          // Platforms Grid
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile ? 1 : (screenWidth > 1200 ? 2 : 1),
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 24,
-              childAspectRatio: isMobile ? 1.3 : 1.2,
+          // Platforms Grid Container
+          Center(
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: isMobile ? double.infinity : 1200,
+              ),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isMobile ? 1 : (screenWidth > 1200 ? 3 : 2),
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio:
+                      isMobile ? 1.1 : (screenWidth > 1200 ? 0.9 : 1.0),
+                ),
+                itemCount: _platforms.length,
+                itemBuilder: (context, index) {
+                  final platform = _platforms[index];
+                  return _buildPlatformCard(context, platform, index);
+                },
+              ),
             ),
-            itemCount: _platforms.length,
-            itemBuilder: (context, index) {
-              final platform = _platforms[index];
-              return _buildPlatformCard(platform, index);
-            },
           ),
         ],
       ),
     );
   }
 
-  Widget _buildPlatformCard(Map<String, dynamic> platform, int index) {
+  Widget _buildPlatformCard(
+      BuildContext context, Map<String, dynamic> platform, int index) {
     return Container(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withValues(alpha: 0.1),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Platform Header
           Row(
             children: [
               Container(
-                width: 50,
-                height: 50,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   color: platform['color'].withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
                   platform['icon'],
                   color: platform['color'],
-                  size: 24,
+                  size: 20,
                 ),
               ),
               const SizedBox(width: 16),
@@ -177,7 +182,7 @@ class CodingProfileSection extends StatelessWidget {
                     Text(
                       platform['name'],
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -185,7 +190,7 @@ class CodingProfileSection extends StatelessWidget {
                     const Text(
                       'Competitive Platform',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: Colors.white70,
                       ),
                     ),
@@ -195,7 +200,7 @@ class CodingProfileSection extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
 
           // Statistics
           Row(
@@ -207,7 +212,7 @@ class CodingProfileSection extends StatelessWidget {
                   Icons.assignment_turned_in,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: _buildStatCard(
                   'Rating',
@@ -218,40 +223,51 @@ class CodingProfileSection extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
 
           // Visit Profile Button
-          Container(
-            width: double.infinity,
-            height: 48,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  platform['color'],
-                  platform['color'].withOpacity(0.8),
-                ],
+          GestureDetector(
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Coming Soon!'),
+                  duration: Duration(seconds: 2),
+                  backgroundColor: Color(0xFF6C63FF),
+                ),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              height: 36,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    platform['color'],
+                    platform['color'].withOpacity(0.8),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Visit Profile',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+              child: const Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Visit Profile',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 8),
-                  Icon(
-                    Icons.open_in_new,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                ],
+                    SizedBox(width: 8),
+                    Icon(
+                      Icons.open_in_new,
+                      color: Colors.white,
+                      size: 22,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -262,12 +278,12 @@ class CodingProfileSection extends StatelessWidget {
 
   Widget _buildStatCard(String label, String value, IconData icon) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withValues(alpha: 0.1),
         ),
       ),
       child: Column(
@@ -275,13 +291,13 @@ class CodingProfileSection extends StatelessWidget {
           Icon(
             icon,
             color: const Color(0xFF6C63FF),
-            size: 20,
+            size: 18,
           ),
           const SizedBox(height: 8),
           Text(
             value,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -289,7 +305,7 @@ class CodingProfileSection extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              fontSize: 12,
+              fontSize: 10,
               color: Colors.white70,
             ),
           ),

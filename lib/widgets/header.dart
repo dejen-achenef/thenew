@@ -24,116 +24,142 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 80,
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Logo
-              GestureDetector(
-                onTap: () => widget.onNavigationTap(0),
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = screenWidth < 768;
+    final isSmallScreen = screenHeight < 600;
+
+    return ClipRect(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: isSmallScreen ? 57 : 77,
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 12 : 16,
+              ),
+              child: SizedBox(
+                height: isSmallScreen ? 57 : 77,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                        ),
-                        borderRadius: BorderRadius.circular(8),
+                    // Logo
+                    GestureDetector(
+                      onTap: () => widget.onNavigationTap(0),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: isSmallScreen ? 28 : 32,
+                            height: isSmallScreen ? 28 : 32,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'D',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: isSmallScreen ? 14 : 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: isSmallScreen ? 4 : 6),
+                          Text(
+                            'ejen',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: isSmallScreen ? 14 : 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                      child: const Center(
-                        child: Text(
-                          'D',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                    ),
+
+                    // Desktop Navigation
+                    if (!isMobile)
+                      Flexible(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: _navItems.map((item) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isSmallScreen ? 8 : 12,
+                                ),
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      widget.onNavigationTap(item['id']),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: isSmallScreen ? 8 : 12,
+                                      vertical: isSmallScreen ? 6 : 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: Colors.transparent,
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          item['icon'],
+                                          color: Colors.white70,
+                                          size: isSmallScreen ? 12 : 14,
+                                        ),
+                                        SizedBox(width: isSmallScreen ? 4 : 6),
+                                        Text(
+                                          item['text'],
+                                          style: TextStyle(
+                                            color: Colors.white70,
+                                            fontSize: isSmallScreen ? 12 : 14,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'ejen',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
+
+                    // Mobile/Web Menu Button
+                    if (isMobile)
+                      GestureDetector(
+                        onTap: () {
+                          _showNavigationDrawer(context);
+                        },
+                        child: Container(
+                          width: isSmallScreen ? 28 : 32,
+                          height: isSmallScreen ? 28 : 32,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white30),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Icon(
+                            Icons.menu,
+                            color: Colors.white,
+                            size: isSmallScreen ? 14 : 16,
+                          ),
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
-
-              // Desktop Navigation
-              if (MediaQuery.of(context).size.width > 768)
-                Row(
-                  children: _navItems.map((item) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: GestureDetector(
-                        onTap: () => widget.onNavigationTap(item['id']),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.transparent,
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                item['icon'],
-                                color: Colors.white70,
-                                size: 16,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                item['text'],
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-
-              // Mobile/Web Menu Button
-              if (MediaQuery.of(context).size.width <= 768)
-                GestureDetector(
-                  onTap: () {
-                    _showNavigationDrawer(context);
-                  },
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white30),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-            ],
-          ),
+            )
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -176,7 +202,7 @@ class _HeaderState extends State<Header> {
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
+                            color: Colors.white.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Icon(
@@ -206,10 +232,10 @@ class _HeaderState extends State<Header> {
                             horizontal: 20,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.05),
+                            color: Colors.white.withValues(alpha: 0.05),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: Colors.white.withOpacity(0.1),
+                              color: Colors.white.withValues(alpha: 0.1),
                             ),
                           ),
                           child: Row(
@@ -233,7 +259,7 @@ class _HeaderState extends State<Header> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
 
                   const SizedBox(height: 20),
                 ],

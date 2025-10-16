@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({super.key});
+  final Function(int)? onNavigationTap;
+
+  const Footer({super.key, this.onNavigationTap});
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final isMobile = screenWidth < 768;
+    final isSmallScreen = screenHeight < 600;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 24),
+      padding: EdgeInsets.symmetric(
+        vertical: isSmallScreen ? 40 : 60,
+        horizontal: isMobile ? 16 : 24,
+      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -23,9 +31,9 @@ class Footer extends StatelessWidget {
       child: Column(
         children: [
           // Main Footer Content
-          isMobile ? _buildMobileLayout() : _buildDesktopLayout(),
+          isMobile ? _buildMobileLayout(context) : _buildDesktopLayout(context),
 
-          const SizedBox(height: 40),
+          SizedBox(height: isSmallScreen ? 30 : 40),
 
           // Divider
           Container(
@@ -34,14 +42,14 @@ class Footer extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   Colors.transparent,
-                  Colors.white.withOpacity(0.2),
+                  Colors.white.withValues(alpha: 0.2),
                   Colors.transparent,
                 ],
               ),
             ),
           ),
 
-          const SizedBox(height: 40),
+          SizedBox(height: isSmallScreen ? 30 : 40),
 
           // Bottom Footer
           Row(
@@ -69,7 +77,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileLayout() {
+  Widget _buildMobileLayout(BuildContext context) {
     return Column(
       children: [
         // Logo and Description
@@ -78,12 +86,12 @@ class Footer extends StatelessWidget {
         const SizedBox(height: 40),
 
         // Quick Links
-        _buildQuickLinks(),
+        _buildQuickLinks(context),
 
         const SizedBox(height: 40),
 
         // Social Links
-        _buildSocialLinks(),
+        _buildSocialLinks(context),
 
         const SizedBox(height: 40),
 
@@ -93,7 +101,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildDesktopLayout() {
+  Widget _buildDesktopLayout(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -108,7 +116,7 @@ class Footer extends StatelessWidget {
         // Quick Links
         Expanded(
           flex: 1,
-          child: _buildQuickLinks(),
+          child: _buildQuickLinks(context),
         ),
 
         const SizedBox(width: 60),
@@ -116,7 +124,7 @@ class Footer extends StatelessWidget {
         // Social Links
         Expanded(
           flex: 1,
-          child: _buildSocialLinks(),
+          child: _buildSocialLinks(context),
         ),
 
         const SizedBox(width: 60),
@@ -173,7 +181,7 @@ class Footer extends StatelessWidget {
 
         // Description
         const Text(
-          'A dedicated Full Stack Cross-Platform App Developer with a passion for crafting innovative digital solutions that work seamlessly across all platforms. I specialize in transforming complex ideas into elegant, unified applications that provide consistent user experiences on web, iOS, and Android platforms.',
+          'A dedicated Full Stack Cross-Platform Mobile App Developer with a passion for crafting innovative digital solutions that work seamlessly across all platforms. I specialize in transforming complex ideas into elegant, unified applications that provide consistent user experiences on web, iOS, and Android platforms.',
           style: TextStyle(
             fontSize: 14,
             color: Colors.white70,
@@ -192,10 +200,10 @@ class Footer extends StatelessWidget {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFF6C63FF).withOpacity(0.1),
+                color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: const Color(0xFF6C63FF).withOpacity(0.3),
+                  color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
                 ),
               ),
               child: Text(
@@ -213,14 +221,14 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickLinks() {
+  Widget _buildQuickLinks(BuildContext context) {
     final links = [
-      {'title': 'Home', 'url': '#hero'},
-      {'title': 'About', 'url': '#about'},
-      {'title': 'Services', 'url': '#services'},
-      {'title': 'Skills', 'url': '#skills'},
-      {'title': 'Portfolio', 'url': '#portfolio'},
-      {'title': 'Contact', 'url': '#contact'},
+      {'title': 'Home', 'index': 0},
+      {'title': 'About', 'index': 1},
+      {'title': 'Services', 'index': 2},
+      {'title': 'Skills', 'index': 3},
+      {'title': 'Portfolio', 'index': 5},
+      {'title': 'Contact', 'index': 6},
     ];
 
     return Column(
@@ -241,10 +249,12 @@ class Footer extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 12),
               child: GestureDetector(
                 onTap: () {
-                  // Handle navigation
+                  if (onNavigationTap != null) {
+                    onNavigationTap!(link['index'] as int);
+                  }
                 },
                 child: Text(
-                  link['title']!,
+                  link['title'] as String,
                   style: const TextStyle(
                     fontSize: 14,
                     color: Colors.white70,
@@ -258,27 +268,31 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialLinks() {
+  Widget _buildSocialLinks(BuildContext context) {
     final socialLinks = const [
       {
         'name': 'GitHub',
         'icon': Icons.code,
         'color': Color(0xFF333333),
+        'url': 'https://github.com/dejen-achenef',
       },
       {
         'name': 'LinkedIn',
         'icon': Icons.work,
         'color': Color(0xFF0077B5),
+        'url': 'https://linkedin.com/in/dejen-achenef',
       },
       {
         'name': 'Twitter',
         'icon': Icons.alternate_email,
         'color': Color(0xFF1DA1F2),
+        'url': 'https://twitter.com/dejen_achenef',
       },
       {
         'name': 'Email',
         'icon': Icons.email,
         'color': Color(0xFFEA4335),
+        'url': 'mailto:dejenacheneffentedese@gmail.com',
       },
     ];
 
@@ -298,30 +312,34 @@ class Footer extends StatelessWidget {
           children: socialLinks.map((social) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: Row(
-                children: [
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      color: (social['color'] as Color).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
+              child: GestureDetector(
+                onTap: () => _launchUrl(context, social['url'] as String),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color:
+                            (social['color'] as Color).withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(
+                        social['icon'] as IconData,
+                        color: social['color'] as Color,
+                        size: 16,
+                      ),
                     ),
-                    child: Icon(
-                      social['icon'] as IconData,
-                      color: social['color'] as Color,
-                      size: 16,
+                    const SizedBox(width: 12),
+                    Text(
+                      social['name'] as String,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white70,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    social['name'] as String,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.white70,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           }).toList(),
@@ -392,5 +410,34 @@ class Footer extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _launchUrl(BuildContext context, String url) async {
+    try {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        // Show error message if URL can't be launched
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Could not launch $url'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      // Show error message if there's an exception
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Error launching URL'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

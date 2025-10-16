@@ -88,9 +88,13 @@ class _HeroSectionState extends State<HeroSection>
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final isSmallScreen = screenHeight < 600;
 
     return Container(
-      height: screenHeight,
+      constraints: BoxConstraints(
+        minHeight: screenHeight - 1,
+      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -112,7 +116,7 @@ class _HeroSectionState extends State<HeroSection>
                   center: Alignment.center,
                   radius: 1.0,
                   colors: [
-                    const Color(0xFF6C63FF).withOpacity(0.1),
+                    const Color(0xFF6C63FF).withValues(alpha: 0.1),
                     Colors.transparent,
                   ],
                 ),
@@ -122,245 +126,277 @@ class _HeroSectionState extends State<HeroSection>
 
           // Main content
           Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Greeting
-                  const Text(
-                    "Hello, I'm",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white70,
-                      fontWeight: FontWeight.w400,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: isMobile ? 16 : 24,
+                  right: isMobile ? 16 : 24,
+                  top: isSmallScreen ? 201 : 241,
+                  bottom: isSmallScreen ? 40 : 80,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Greeting
+                    const Text(
+                      "Hello, I'm",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white70,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
-                  // Name
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Dejen ",
-                          style: TextStyle(
-                            fontSize: screenWidth > 768 ? 64 : 48,
-                            fontWeight: FontWeight.bold,
-                            foreground: Paint()
-                              ..shader = const LinearGradient(
-                                colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                              ).createShader(
-                                const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                    // Name
+                    Flexible(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Dejen ",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 36 : 42) : 64,
+                                fontWeight: FontWeight.bold,
+                                foreground: Paint()
+                                  ..shader = const LinearGradient(
+                                    colors: [
+                                      Color(0xFF6C63FF),
+                                      Color(0xFF9C88FF)
+                                    ],
+                                  ).createShader(
+                                    const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                                  ),
                               ),
-                          ),
-                        ),
-                        TextSpan(
-                          text: "Achenef",
-                          style: TextStyle(
-                            fontSize: screenWidth > 768 ? 64 : 48,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Typewriter effect
-                  SizedBox(
-                    height: 60,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          _currentText,
-                          style: TextStyle(
-                            fontSize: screenWidth > 768 ? 24 : 20,
-                            color: const Color(0xFF6C63FF),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        AnimatedBuilder(
-                          animation: _cursorController,
-                          builder: (context, child) {
-                            return Opacity(
-                              opacity: _cursorController.value,
-                              child: Container(
-                                width: 2,
-                                height: 30,
-                                color: const Color(0xFF6C63FF),
-                                margin: const EdgeInsets.only(left: 4),
+                            ),
+                            TextSpan(
+                              text: "Achenef",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 36 : 42) : 64,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
-                            );
-                          },
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 32),
+                    const SizedBox(height: 24),
 
-                  // Description
-                  SizedBox(
-                    width: screenWidth > 768 ? 600 : double.infinity,
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
+                    // Typewriter effect
+                    SizedBox(
+                      height: isSmallScreen ? 50 : 60,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextSpan(
-                            text:
-                                "Passionate about crafting exceptional digital solutions that bridge the gap between ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white70,
-                              height: 1.6,
+                          Flexible(
+                            child: Text(
+                              _currentText,
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 16 : 18) : 24,
+                                color: const Color(0xFF6C63FF),
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                          TextSpan(
-                            text: "cutting-edge technology",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF6C63FF),
-                              fontWeight: FontWeight.w600,
-                              height: 1.6,
-                            ),
-                          ),
-                          TextSpan(
-                            text: " and ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white70,
-                              height: 1.6,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "user-centric design",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF6C63FF),
-                              fontWeight: FontWeight.w600,
-                              height: 1.6,
-                            ),
-                          ),
-                          TextSpan(
-                            text:
-                                ". I specialize in building scalable applications that deliver ",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white70,
-                              height: 1.6,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "outstanding user experiences",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF6C63FF),
-                              fontWeight: FontWeight.w600,
-                              height: 1.6,
-                            ),
-                          ),
-                          TextSpan(
-                            text:
-                                " while solving real-world problems through innovative development approaches.",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white70,
-                              height: 1.6,
-                            ),
+                          AnimatedBuilder(
+                            animation: _cursorController,
+                            builder: (context, child) {
+                              return Opacity(
+                                opacity: _cursorController.value,
+                                child: Container(
+                                  width: 2,
+                                  height: isSmallScreen ? 24 : 30,
+                                  color: const Color(0xFF6C63FF),
+                                  margin: const EdgeInsets.only(left: 4),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),
                     ),
-                  ),
 
-                  const SizedBox(height: 48),
+                    const SizedBox(height: 32),
 
-                  // CTA Buttons
-                  screenWidth < 768
-                      ? Column(
+                    // Description
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: isMobile ? double.infinity : 600,
+                      ),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
+                        text: TextSpan(
                           children: [
-                            _buildButton(
-                              text: "Get In Touch",
-                              icon: Icons.email,
-                              isPrimary: true,
-                              onTap: () {
-                                // Navigate to contact section (index 6)
-                                widget.onNavigationTap?.call(6);
-                              },
+                            TextSpan(
+                              text:
+                                  "Passionate about crafting exceptional digital solutions that bridge the gap between ",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Colors.white70,
+                                height: 1.6,
+                              ),
                             ),
-                            const SizedBox(height: 16),
-                            _buildButton(
-                              text: "View My Work",
-                              icon: Icons.folder,
-                              isPrimary: false,
-                              onTap: () {
-                                // Navigate to portfolio section (index 5)
-                                widget.onNavigationTap?.call(5);
-                              },
+                            TextSpan(
+                              text: "cutting-edge technology",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Color(0xFF6C63FF),
+                                fontWeight: FontWeight.w600,
+                                height: 1.6,
+                              ),
                             ),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildButton(
-                              text: "Get In Touch",
-                              icon: Icons.email,
-                              isPrimary: true,
-                              onTap: () {
-                                // Navigate to contact section (index 6)
-                                widget.onNavigationTap?.call(6);
-                              },
+                            TextSpan(
+                              text: " and ",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Colors.white70,
+                                height: 1.6,
+                              ),
                             ),
-                            const SizedBox(width: 24),
-                            _buildButton(
-                              text: "View My Work",
-                              icon: Icons.folder,
-                              isPrimary: false,
-                              onTap: () {
-                                // Navigate to portfolio section (index 5)
-                                widget.onNavigationTap?.call(5);
-                              },
+                            TextSpan(
+                              text: "user-centric design",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Color(0xFF6C63FF),
+                                fontWeight: FontWeight.w600,
+                                height: 1.6,
+                              ),
+                            ),
+                            TextSpan(
+                              text:
+                                  ". I specialize in building scalable applications that deliver ",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Colors.white70,
+                                height: 1.6,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "outstanding user experiences",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Color(0xFF6C63FF),
+                                fontWeight: FontWeight.w600,
+                                height: 1.6,
+                              ),
+                            ),
+                            TextSpan(
+                              text:
+                                  " while solving real-world problems through innovative development approaches.",
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallScreen ? 14 : 15) : 16,
+                                color: Colors.white70,
+                                height: 1.6,
+                              ),
                             ),
                           ],
                         ),
+                      ),
+                    ),
 
-                  const SizedBox(height: 80),
+                    const SizedBox(height: 48),
 
-                  // Scroll indicator
-                  Column(
-                    children: [
-                      Container(
-                        width: 2,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              const Color(0xFF6C63FF),
-                              Colors.transparent,
+                    // CTA Buttons
+                    isMobile
+                        ? Column(
+                            children: [
+                              _buildButton(
+                                text: "Get In Touch",
+                                icon: Icons.email,
+                                isPrimary: true,
+                                onTap: () {
+                                  // Navigate to contact section (index 6)
+                                  widget.onNavigationTap?.call(6);
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                              _buildButton(
+                                text: "View My Work",
+                                icon: Icons.folder,
+                                isPrimary: false,
+                                onTap: () {
+                                  // Navigate to portfolio section (index 5)
+                                  widget.onNavigationTap?.call(5);
+                                },
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buildButton(
+                                text: "Get In Touch",
+                                icon: Icons.email,
+                                isPrimary: true,
+                                onTap: () {
+                                  // Navigate to contact section (index 6)
+                                  widget.onNavigationTap?.call(6);
+                                },
+                              ),
+                              const SizedBox(width: 24),
+                              _buildButton(
+                                text: "View My Work",
+                                icon: Icons.folder,
+                                isPrimary: false,
+                                onTap: () {
+                                  // Navigate to portfolio section (index 5)
+                                  widget.onNavigationTap?.call(5);
+                                },
+                              ),
                             ],
                           ),
+
+                    SizedBox(height: isSmallScreen ? 40 : 80),
+
+                    // Scroll indicator
+                    Column(
+                      children: [
+                        Container(
+                          width: 2,
+                          height: isSmallScreen ? 30 : 40,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                const Color(0xFF6C63FF),
+                                Colors.transparent,
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        "Scroll Down",
-                        style: TextStyle(
-                          color: Colors.white30,
-                          fontSize: 12,
+                        const SizedBox(height: 8),
+                        Text(
+                          "Scroll Down",
+                          style: TextStyle(
+                            color: Colors.white30,
+                            fontSize: isSmallScreen ? 10 : 12,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

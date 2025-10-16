@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'fade_in_widget.dart';
 
 class PortfolioSection extends StatefulWidget {
   const PortfolioSection({super.key});
@@ -11,7 +12,7 @@ class PortfolioSection extends StatefulWidget {
 class _PortfolioSectionState extends State<PortfolioSection> {
   String _selectedCategory = 'All';
 
-  final List<String> _categories = [
+  final List<String> _categories = const [
     'All',
     'Web Apps',
     'Mobile Apps',
@@ -21,66 +22,65 @@ class _PortfolioSectionState extends State<PortfolioSection> {
   final List<Map<String, dynamic>> _projects = const [
     {
       'title': 'DTech Marketplace',
-      'category': 'Mobile Apps',
-      'description':
-          'A comprehensive technology marketplace mobile application featuring secure payment processing, advanced user management, and an intuitive admin dashboard. Built with Flutter to deliver exceptional shopping experiences and robust backend functionality for tech products and services.',
-      'technologies': ['Flutter', 'Dart', 'Firebase', 'Stripe'],
-      'codeUrl': 'https://github.com/dejen-achenef/dtech-marketplace-flutter',
-      'liveUrl': 'https://dtech-marketplace-flutter.netlify.app',
-    },
-    {
-      'title': 'Task Management App',
-      'category': 'Mobile Apps',
-      'description':
-          'A powerful cross-platform productivity application enabling seamless task organization and team collaboration. Features real-time synchronization, intuitive user interface, and comprehensive project management capabilities.',
-      'technologies': ['Flutter', 'Firebase', 'Dart'],
-      'codeUrl': 'https://github.com/dejen-achenef/task-manager-flutter',
-      'liveUrl': 'https://taskmanager-demo.netlify.app',
-    },
-    {
-      'title': 'Social Media Dashboard',
-      'category': 'Full Stack',
-      'description':
-          'An advanced social media management platform providing comprehensive analytics, content scheduling, and multi-platform integration. Built with Flutter frontend and Node.js backend to streamline social media operations and maximize engagement across all channels.',
-      'technologies': ['Flutter', 'Node.js', 'PostgreSQL', 'Redis'],
-      'codeUrl': 'https://github.com/dejen-achenef/social-dashboard-flutter',
-      'liveUrl': 'https://social-dashboard-flutter.netlify.app',
-    },
-    {
-      'title': 'Portfolio App',
-      'category': 'Mobile Apps',
-      'description':
-          'A stunning, modern portfolio mobile application showcasing professional work with smooth animations and responsive design. Built with Flutter, featuring interactive elements, dark theme optimization, and seamless user experience across all devices.',
-      'technologies': ['Flutter', 'Dart', 'Firebase'],
-      'codeUrl': 'https://github.com/dejen-achenef/portfolio-flutter',
-      'liveUrl': 'https://dejen-portfolio-flutter.netlify.app',
-    },
-    {
-      'title': 'Food Delivery App',
-      'category': 'Mobile Apps',
-      'description':
-          'A feature-rich food delivery application with real-time order tracking, secure payment processing, and seamless user experience. Includes restaurant discovery, menu browsing, and efficient delivery management system.',
-      'technologies': ['Flutter', 'Firebase', 'Google Maps'],
-      'codeUrl': 'https://github.com/dejen-achenef/food-delivery-app',
-      'liveUrl': 'https://fooddelivery-demo.netlify.app',
-    },
-    {
-      'title': 'Learning Management System',
-      'category': 'Full Stack',
-      'description':
-          'A comprehensive educational platform featuring course management, interactive video streaming, and automated assessment tools. Built with Flutter frontend and Node.js backend to enhance online learning experiences with intuitive interfaces and powerful backend systems.',
-      'technologies': ['Flutter', 'Node.js', 'MongoDB', 'Firebase'],
-      'codeUrl': 'https://github.com/dejen-achenef/lms-flutter',
-      'liveUrl': 'https://lms-flutter.netlify.app',
-    },
-    {
-      'title': 'E-Commerce Web Platform',
       'category': 'Web Apps',
       'description':
-          'A modern, responsive e-commerce web application built with React and Node.js. Features include product catalog, shopping cart, user authentication, payment processing, and admin dashboard for managing products and orders.',
-      'technologies': ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      'codeUrl': 'https://github.com/dejen-achenef/ecommerce-web',
-      'liveUrl': 'https://ecommerce-web-demo.netlify.app',
+          'A comprehensive technology marketplace web application featuring secure payment processing, advanced user management, and an intuitive admin dashboard. Built with Flutter Web to deliver exceptional shopping experiences and robust backend functionality for tech products and services.',
+      'technologies': ['Flutter', 'Firebase', 'MongoDB'],
+      'codeUrl': 'https://github.com/dejen-achenef/DTech_Marketplace',
+      'liveUrl':
+          'https://d-tech-marketplace-8olq-jjvwo26j3-dejens-projects-ae0a9fba.vercel.app',
+      'image': 'assets/images/dtech_marketplace.png',
+    },
+    {
+      'title': 'Wonder Tutor',
+      'category': 'Mobile Apps',
+      'description':
+          'A comprehensive mobile learning platform connecting students with expert tutors. Features video calls, interactive whiteboard, progress tracking, and personalized learning paths for enhanced educational experiences. Coming soon to Play Store.',
+      'technologies': ['Flutter', 'Firebase', 'Express.js', 'MongoDB'],
+      'codeUrl': 'Coming Soon',
+      'liveUrl': 'Coming Soon to Play Store',
+      'image': 'assets/images/tutor.png',
+    },
+    {
+      'title': 'Personal Dashboard',
+      'category': 'Web Apps',
+      'description':
+          'A comprehensive personal productivity dashboard featuring real-time analytics, task management, and data visualization. Built with Flutter Web and JavaScript to provide users with insights into their daily activities and productivity metrics.',
+      'technologies': ['Flutter', 'JavaScript', 'Firebase'],
+      'codeUrl': 'https://github.com/dejen-achenef/simple_dashboard',
+      'liveUrl':
+          'https://simple-dashboard-v6zi-bmqzx9mb4-dejens-projects-ae0a9fba.vercel.app/',
+      'image': 'assets/images/dashbord.png',
+    },
+    {
+      'title': 'Nike E-Commerce',
+      'category': 'Web Apps',
+      'description':
+          'A modern, responsive e-commerce web application for Nike products featuring advanced product catalog, seamless shopping cart, secure payment processing, and user authentication. Built with Flutter Web for optimal performance and user experience.',
+      'technologies': ['Flutter', 'Firebase', 'MongoDB'],
+      'codeUrl': 'https://github.com/dejen-achenef/another_ecommerce',
+      'liveUrl': 'https://another-ecommerce-9kod.vercel.app/',
+      'image': 'assets/images/nike_ecommerce.png',
+    },
+    {
+      'title': 'Chat Application',
+      'category': 'Mobile Apps',
+      'description':
+          'A real-time messaging application with advanced features including group chats, file sharing, voice messages, and end-to-end encryption. Built with Flutter and Firebase for seamless communication across all devices with modern UI/UX design. Currently in development.',
+      'technologies': ['Flutter', 'Firebase', 'WebRTC'],
+      'codeUrl': 'Coming Soon',
+      'liveUrl': 'Coming Soon',
+      'image': 'assets/images/dtech_marketplace.png',
+    },
+    {
+      'title': 'Renter Mobile App',
+      'category': 'Mobile Apps',
+      'description':
+          'A comprehensive property rental mobile application connecting landlords and tenants. Features include property listings, virtual tours, secure payments, maintenance requests, and real-time communication for seamless rental experiences. Currently in development.',
+      'technologies': ['Flutter', 'Firebase', 'Google Maps', 'Stripe'],
+      'codeUrl': 'Coming Soon',
+      'liveUrl': 'Coming Soon',
+      'image': 'assets/images/dtech_marketplace.png',
     },
   ];
 
@@ -96,90 +96,111 @@ class _PortfolioSectionState extends State<PortfolioSection> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final isMobile = screenWidth < 768;
+    final isSmallScreen = screenHeight < 600;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      padding: EdgeInsets.symmetric(
+        vertical: isSmallScreen ? 30 : 40,
+        horizontal: isMobile ? 16 : 24,
+      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
           colors: [
-            Color(0xFF0A0A0A),
+            Color(0xFF0F0F23),
             Color(0xFF1A1A2E),
-            Color(0xFF0A0A0A),
+            Color(0xFF16213E),
           ],
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Section Header
-          Column(
-            children: [
-              const Text(
-                'My Work',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF6C63FF),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 16),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Featured ',
-                      style: TextStyle(
-                        fontSize: isMobile ? 36 : 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'Projects',
-                      style: TextStyle(
-                        fontSize: isMobile ? 36 : 48,
-                        fontWeight: FontWeight.bold,
-                        foreground: Paint()
-                          ..shader = const LinearGradient(
-                            colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                          ).createShader(
-                            const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
-                          ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: isMobile ? double.infinity : 600,
-                child: const Text(
-                  'A showcase of my recent projects and creative solutions',
-                  textAlign: TextAlign.center,
+          FadeInWidget(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Featured Projects',
                   style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white70,
-                    height: 1.6,
+                    fontSize: 16,
+                    color: Color(0xFF6C63FF),
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                Flexible(
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.visible,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'My ',
+                          style: TextStyle(
+                            fontSize: isMobile ? (isSmallScreen ? 28 : 32) : 48,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Projects',
+                          style: TextStyle(
+                            fontSize: isMobile ? (isSmallScreen ? 28 : 32) : 48,
+                            fontWeight: FontWeight.bold,
+                            foreground: Paint()
+                              ..shader = const LinearGradient(
+                                colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
+                              ).createShader(
+                                const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                              ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: isMobile ? double.infinity : 600,
+                  ),
+                  child: Text(
+                    'Explore my collection of projects that showcase my skills in mobile app development, web applications, and full-stack solutions. Each project represents a unique challenge solved with innovative approaches and modern technologies.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: isMobile ? (isSmallScreen ? 16 : 18) : 20,
+                      color: Colors.white70,
+                      height: 1.6,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
 
-          const SizedBox(height: 60),
+          const SizedBox(height: 30),
 
           // Category Filter
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: _categories.map((category) {
-                final isSelected = _selectedCategory == category;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: GestureDetector(
+          if (!isMobile)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.05),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: _categories.map((category) {
+                  final isSelected = _selectedCategory == category;
+                  return GestureDetector(
                     onTap: () {
                       setState(() {
                         _selectedCategory = category;
@@ -187,84 +208,43 @@ class _PortfolioSectionState extends State<PortfolioSection> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
+                        horizontal: 16,
+                        vertical: 8,
                       ),
+                      margin: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        gradient: isSelected
-                            ? const LinearGradient(
-                                colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                              )
-                            : null,
-                        color:
-                            isSelected ? null : Colors.white.withOpacity(0.05),
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(
-                          color: isSelected
-                              ? Colors.transparent
-                              : Colors.white.withOpacity(0.1),
-                        ),
+                        color: isSelected
+                            ? const Color(0xFF6C63FF)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
                         category,
                         style: TextStyle(
                           color: isSelected ? Colors.white : Colors.white70,
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 60),
+          const SizedBox(height: 30),
 
-          // Projects List
-          isMobile 
-            ? _buildMobileProjectsList()
-            : _buildDesktopProjectsGrid(),
-
-          const SizedBox(height: 60),
-
-          // View More Button
-          Container(
-            width: 200,
-            height: 56,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFF6C63FF), width: 2),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(30),
-                onTap: () {
-                  // Handle view more
-                },
-                child: const Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'View More',
-                        style: TextStyle(
-                          color: Color(0xFF6C63FF),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: Color(0xFF6C63FF),
-                        size: 18,
-                      ),
-                    ],
-                  ),
+          // Projects Grid Container
+          FadeInWidget(
+            delay: const Duration(milliseconds: 200),
+            child: Center(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: isMobile ? double.infinity : 1200,
                 ),
+                child: isMobile
+                    ? _buildMobileProjectsList()
+                    : _buildDesktopProjectsGrid(),
               ),
             ),
           ),
@@ -275,364 +255,245 @@ class _PortfolioSectionState extends State<PortfolioSection> {
 
   Widget _buildMobileProjectsList() {
     return Column(
-      children: _filteredProjects.asMap().entries.map((entry) {
-        final index = entry.key;
-        final project = entry.value;
+      children: _filteredProjects.map((project) {
         return Padding(
-          padding: EdgeInsets.only(bottom: index < _filteredProjects.length - 1 ? 20 : 0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Colors.white.withOpacity(0.1),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-            ),
-            child: _buildMobileProjectCard(project),
-          ),
+          padding: const EdgeInsets.only(bottom: 24),
+          child: _buildProjectCard(project, true),
         );
       }).toList(),
     );
   }
 
   Widget _buildDesktopProjectsGrid() {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: MediaQuery.of(context).size.width > 1200 ? 3 : 2,
-        crossAxisSpacing: 24,
-        mainAxisSpacing: 24,
-        childAspectRatio: 0.9,
-      ),
-      itemCount: _filteredProjects.length,
-      itemBuilder: (context, index) {
-        final project = _filteredProjects[index];
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.05),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: Colors.white.withOpacity(0.1),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
-          child: _buildDesktopProjectCard(project),
+    return Wrap(
+      spacing: 20,
+      runSpacing: 20,
+      children: _filteredProjects.map((project) {
+        return SizedBox(
+          width: (1200 - 20) / 2,
+          child: _buildProjectCard(project, false),
         );
-      },
+      }).toList(),
     );
   }
 
-
-  Widget _buildMobileProjectCard(Map<String, dynamic> project) {
-    return IntrinsicHeight(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-        // Project Image Placeholder
-        Container(
-          height: 100,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-            gradient: LinearGradient(
-              colors: [
-                const Color(0xFF6C63FF).withOpacity(0.3),
-                const Color(0xFF9C88FF).withOpacity(0.3),
-              ],
-            ),
-          ),
-          child: const Center(
-            child: Icon(
-              Icons.image,
-              size: 30,
-              color: Colors.white70,
-            ),
-          ),
-        ),
-
-        // Project Details
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-              // Category Badge
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
+  Widget _buildProjectCard(Map<String, dynamic> project, bool isMobile) {
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 600),
+      tween: Tween(begin: 0.0, end: 1.0),
+      builder: (context, value, child) {
+        return Transform.translate(
+          offset: Offset(0, 30 * (1 - value)),
+          child: Opacity(
+            opacity: value,
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6C63FF).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(24),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF1A1A2E),
+                      Color(0xFF16213E),
+                    ],
+                  ),
                   border: Border.all(
-                    color: const Color(0xFF6C63FF).withOpacity(0.3),
+                    color: Colors.white.withValues(alpha: 0.1),
+                    width: 1,
                   ),
-                ),
-                child: Text(
-                  project['category'],
-                  style: const TextStyle(
-                    color: Color(0xFF6C63FF),
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 6),
-
-              // Project Title
-              Text(
-                project['title'],
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-
-              const SizedBox(height: 3),
-
-              // Project Description
-              Text(
-                project['description'],
-                style: const TextStyle(
-                  fontSize: 11,
-                  color: Colors.white70,
-                  height: 1.1,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-
-              const SizedBox(height: 6),
-
-              // Technologies
-              Wrap(
-                spacing: 4,
-                runSpacing: 4,
-                children: (project['technologies'] as List<String>)
-                    .take(2)
-                    .map((tech) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 2,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      offset: const Offset(0, 8),
+                      spreadRadius: 0,
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      tech,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 9,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-
-              const SizedBox(height: 6),
-
-              // Action Buttons
-              Row(
-                children: [
-                  Expanded(
-                    child: _buildActionButton(
-                      text: 'Code',
-                      icon: Icons.code,
-                      onTap: () => _launchUrl(project['codeUrl']),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: _buildActionButton(
-                      text: 'Live',
-                      icon: Icons.open_in_new,
-                      onTap: () => _launchUrl(project['liveUrl']),
-                      isPrimary: true,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDesktopProjectCard(Map<String, dynamic> project) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Project Image Placeholder
-        Expanded(
-          flex: 3,
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              gradient: LinearGradient(
-                colors: [
-                  const Color(0xFF6C63FF).withOpacity(0.3),
-                  const Color(0xFF9C88FF).withOpacity(0.3),
-                ],
-              ),
-            ),
-            child: const Center(
-              child: Icon(
-                Icons.image,
-                size: 60,
-                color: Colors.white70,
-              ),
-            ),
-          ),
-        ),
-
-        // Project Details
-        Expanded(
-          flex: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Category Badge
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6C63FF).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: const Color(0xFF6C63FF).withOpacity(0.3),
-                    ),
-                  ),
-                  child: Text(
-                    project['category'],
-                    style: const TextStyle(
-                      color: Color(0xFF6C63FF),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                // Project Title
-                Text(
-                  project['title'],
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-
-                const SizedBox(height: 8),
-
-                // Project Description
-                Text(
-                  project['description'],
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                    height: 1.4,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-
-                const SizedBox(height: 16),
-
-                // Technologies
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: (project['technologies'] as List<String>)
-                      .take(3)
-                      .map((tech) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        tech,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-
-                const SizedBox(height: 16),
-
-                // Action Buttons
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildActionButton(
-                        text: 'Code',
-                        icon: Icons.code,
-                        onTap: () => _launchUrl(project['codeUrl']),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildActionButton(
-                        text: 'Live',
-                        icon: Icons.open_in_new,
-                        onTap: () => _launchUrl(project['liveUrl']),
-                        isPrimary: true,
-                      ),
+                    BoxShadow(
+                      color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
+                      blurRadius: 30,
+                      offset: const Offset(0, 0),
+                      spreadRadius: 0,
                     ),
                   ],
                 ),
-              ],
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.white.withValues(alpha: 0.05),
+                        Colors.white.withValues(alpha: 0.02),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Project Image
+                      Container(
+                        height: 260,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
+                          child: project['image'] != null
+                              ? Image.asset(
+                                  project['image'],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                )
+                              : Container(
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color(0xFF6C63FF),
+                                        Color(0xFF9C88FF),
+                                      ],
+                                    ),
+                                  ),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.image,
+                                      size: 80,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ),
+
+                      // Project Content
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Category Tag
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF6C63FF)
+                                    .withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                project['category'],
+                                style: const TextStyle(
+                                  color: Color(0xFF6C63FF),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+
+                            // Project Title
+                            Text(
+                              project['title'],
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                height: 1.2,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+
+                            // Project Description
+                            Text(
+                              project['description'],
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: Colors.white70,
+                                height: 1.5,
+                              ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Technology Chips
+                            Wrap(
+                              spacing: 8,
+                              runSpacing: 8,
+                              children:
+                                  (project['technologies'] as List<String>)
+                                      .take(3)
+                                      .map((tech) {
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color:
+                                          Colors.white.withValues(alpha: 0.2),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    tech,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                            const SizedBox(height: 24),
+
+                            // Action Buttons
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _buildActionButton(
+                                    text: '</> Code',
+                                    icon: Icons.code,
+                                    onTap: () => _launchUrl(project['codeUrl']),
+                                    isOutlined: true,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: _buildActionButton(
+                                    text: '🔗 Live',
+                                    icon: Icons.open_in_new,
+                                    onTap: () => _launchUrl(project['liveUrl']),
+                                    isPrimary: true,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -641,40 +502,76 @@ class _PortfolioSectionState extends State<PortfolioSection> {
     required IconData icon,
     required VoidCallback onTap,
     bool isPrimary = false,
+    bool isOutlined = false,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 36,
-        decoration: BoxDecoration(
-          gradient: isPrimary
-              ? const LinearGradient(
-                  colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                )
-              : null,
-          color: isPrimary ? null : Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(8),
-          border: isPrimary
-              ? null
-              : Border.all(
-                  color: Colors.white.withOpacity(0.2),
-                ),
-        ),
-        child: Center(
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          height: 44,
+          decoration: BoxDecoration(
+            gradient: isPrimary
+                ? const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
+                  )
+                : null,
+            color: isPrimary
+                ? null
+                : isOutlined
+                    ? Colors.transparent
+                    : Colors.white.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(22),
+            border: isPrimary
+                ? null
+                : Border.all(
+                    color: isOutlined
+                        ? Colors.white.withValues(alpha: 0.3)
+                        : Colors.white.withValues(alpha: 0.2),
+                    width: 1.5,
+                  ),
+            boxShadow: isPrimary
+                ? [
+                    BoxShadow(
+                      color: const Color(0xFF6C63FF).withValues(alpha: 0.4),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 icon,
-                color: isPrimary ? Colors.white : const Color(0xFF6C63FF),
                 size: 16,
+                color: isPrimary
+                    ? Colors.white
+                    : isOutlined
+                        ? Colors.white
+                        : Colors.white70,
               ),
-              const SizedBox(width: 6),
+              const SizedBox(width: 8),
               Text(
                 text,
                 style: TextStyle(
-                  color: isPrimary ? Colors.white : const Color(0xFF6C63FF),
-                  fontSize: 12,
+                  color: isPrimary
+                      ? Colors.white
+                      : isOutlined
+                          ? Colors.white
+                          : Colors.white70,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -686,23 +583,31 @@ class _PortfolioSectionState extends State<PortfolioSection> {
   }
 
   Future<void> _launchUrl(String url) async {
+    if (url == 'Coming Soon' || url == 'Coming Soon to Play Store') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('This project is coming soon!'),
+          backgroundColor: Color(0xFF6C63FF),
+        ),
+      );
+      return;
+    }
+
     try {
-      final uri = Uri.parse(url);
+      final Uri uri = Uri.parse(url);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri, mode: LaunchMode.externalApplication);
       } else {
-        // Show error message if URL can't be launched
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Could not launch $url'),
+            const SnackBar(
+              content: Text('Could not launch URL'),
               backgroundColor: Colors.red,
             ),
           );
         }
       }
     } catch (e) {
-      // Show error message if there's an exception
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

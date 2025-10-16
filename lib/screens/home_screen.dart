@@ -19,13 +19,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   final List<GlobalKey> _sectionKeys = [
-    GlobalKey(),
-    GlobalKey(),
-    GlobalKey(),
-    GlobalKey(),
-    GlobalKey(),
-    GlobalKey(),
-    GlobalKey(),
+    GlobalKey(), // Home/Hero
+    GlobalKey(), // About
+    GlobalKey(), // Services
+    GlobalKey(), // Skills
+    GlobalKey(), // Coding Profiles
+    GlobalKey(), // Projects
+    GlobalKey(), // Contact
+    GlobalKey(), // Footer
   ];
 
   @override
@@ -55,69 +56,87 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          // Header
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: HeaderDelegate(
-              child: Header(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF0A0A0A),
+              Color(0xFF1A1A2E),
+              Color(0xFF16213E),
+              Color(0xFF0A0A0A),
+            ],
+            stops: [0.0, 0.3, 0.7, 1.0],
+          ),
+        ),
+        child: CustomScrollView(
+          controller: _scrollController,
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            // Header
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: HeaderDelegate(
+                child: Header(
+                  onNavigationTap: _scrollToSection,
+                ),
+              ),
+            ),
+
+            // Hero Section (Home)
+            SliverToBoxAdapter(
+              key: _sectionKeys[0],
+              child: HeroSection(
                 onNavigationTap: _scrollToSection,
               ),
             ),
-          ),
 
-          // Hero Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[0],
-            child: HeroSection(
-              onNavigationTap: _scrollToSection,
+            // About Section
+            SliverToBoxAdapter(
+              key: _sectionKeys[1],
+              child: const AboutSection(),
             ),
-          ),
 
-          // About Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[1],
-            child: const AboutSection(),
-          ),
+            // Services Section
+            SliverToBoxAdapter(
+              key: _sectionKeys[2],
+              child: const ServicesSection(),
+            ),
 
-          // Services Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[2],
-            child: const ServicesSection(),
-          ),
+            // Skills Section
+            SliverToBoxAdapter(
+              key: _sectionKeys[3],
+              child: const SkillsSection(),
+            ),
 
-          // Skills Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[3],
-            child: const SkillsSection(),
-          ),
+            // Coding Profile Section
+            SliverToBoxAdapter(
+              key: _sectionKeys[4],
+              child: const CodingProfileSection(),
+            ),
 
-          // Coding Profile Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[4],
-            child: const CodingProfileSection(),
-          ),
+            // Projects Section
+            SliverToBoxAdapter(
+              key: _sectionKeys[5],
+              child: const PortfolioSection(),
+            ),
 
-          // Portfolio Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[5],
-            child: const PortfolioSection(),
-          ),
+            // Contact Section
+            SliverToBoxAdapter(
+              key: _sectionKeys[6],
+              child: const ContactSection(),
+            ),
 
-          // Contact Section
-          SliverToBoxAdapter(
-            key: _sectionKeys[6],
-            child: const ContactSection(),
-          ),
-
-          // Footer
-          const SliverToBoxAdapter(
-            child: Footer(),
-          ),
-        ],
+            // Footer
+            SliverToBoxAdapter(
+              key: _sectionKeys[7],
+              child: Footer(
+                onNavigationTap: _scrollToSection,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -139,11 +158,17 @@ class HeaderDelegate extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF0A0A0A).withOpacity(0.95),
+        color: const Color(0xFF0A0A0A).withValues(alpha: 0.9),
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.white.withValues(alpha: 0.1),
+            width: 1,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
+            color: Colors.black.withValues(alpha: 0.3),
+            blurRadius: 20,
             offset: const Offset(0, 2),
           ),
         ],
@@ -153,10 +178,10 @@ class HeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 80;
+  double get maxExtent => 78;
 
   @override
-  double get minExtent => 80;
+  double get minExtent => 78;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

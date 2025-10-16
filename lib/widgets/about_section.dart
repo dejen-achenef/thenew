@@ -39,10 +39,15 @@ class _AboutSectionState extends State<AboutSection> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final isMobile = screenWidth < 768;
+    final isSmallScreen = screenHeight < 600;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      padding: EdgeInsets.symmetric(
+        vertical: isSmallScreen ? 60 : 100,
+        horizontal: isMobile ? 16 : 24,
+      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -55,9 +60,11 @@ class _AboutSectionState extends State<AboutSection> {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Section Header
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 'Professional Profile',
@@ -68,38 +75,41 @@ class _AboutSectionState extends State<AboutSection> {
                 ),
               ),
               const SizedBox(height: 16),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Full Stack Cross-Platform ',
-                      style: TextStyle(
-                        fontSize: isMobile ? 28 : 36,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+              Flexible(
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.visible,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Full Stack Cross-Platform ',
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallScreen ? 24 : 28) : 36,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: 'App Developer',
-                      style: TextStyle(
-                        fontSize: isMobile ? 28 : 36,
-                        fontWeight: FontWeight.bold,
-                        foreground: Paint()
-                          ..shader = const LinearGradient(
-                            colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                          ).createShader(
-                            const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
-                          ),
+                      TextSpan(
+                        text: 'App Developer',
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallScreen ? 24 : 28) : 36,
+                          fontWeight: FontWeight.bold,
+                          foreground: Paint()
+                            ..shader = const LinearGradient(
+                              colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
+                            ).createShader(
+                              const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                            ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
 
-          const SizedBox(height: 80),
+          SizedBox(height: isSmallScreen ? 40 : 80),
 
           // Content Grid
           isMobile ? _buildMobileLayout() : _buildDesktopLayout(),
@@ -159,7 +169,7 @@ class _AboutSectionState extends State<AboutSection> {
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF6C63FF).withOpacity(0.3),
+              color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
               blurRadius: 30,
               spreadRadius: 5,
             ),
@@ -170,7 +180,7 @@ class _AboutSectionState extends State<AboutSection> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: const DecorationImage(
-              image: AssetImage('assets/images/image.png'),
+              image: AssetImage('assets/images/dejen.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -218,7 +228,7 @@ class _AboutSectionState extends State<AboutSection> {
             children: [
               TextSpan(
                 text:
-                    'I am a passionate Full Stack Cross-Platform App Developer specializing in creating seamless digital experiences across multiple platforms. With ',
+                    'I am a passionate Full Stack Cross-Platform App Developer specializing in creating seamless digital experiences across multiple platforms. Currently working as a developer on the Renter mobile app, I bring ',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
@@ -300,10 +310,10 @@ class _AboutSectionState extends State<AboutSection> {
             return Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                 ),
               ),
               child: Row(
@@ -316,6 +326,7 @@ class _AboutSectionState extends State<AboutSection> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -360,7 +371,7 @@ class _AboutSectionState extends State<AboutSection> {
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF6C63FF).withOpacity(0.3),
+                color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
                 blurRadius: 20,
                 offset: const Offset(0, 10),
               ),

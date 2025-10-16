@@ -58,10 +58,15 @@ class _ContactSectionState extends State<ContactSection> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final isMobile = screenWidth < 768;
+    final isSmallScreen = screenHeight < 600;
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 24),
+      padding: EdgeInsets.symmetric(
+        vertical: isSmallScreen ? 60 : 100,
+        horizontal: isMobile ? 16 : 24,
+      ),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -74,9 +79,11 @@ class _ContactSectionState extends State<ContactSection> {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Section Header
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
                 'Get In Touch',
@@ -87,42 +94,47 @@ class _ContactSectionState extends State<ContactSection> {
                 ),
               ),
               const SizedBox(height: 16),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Contact ',
-                      style: TextStyle(
-                        fontSize: isMobile ? 36 : 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+              Flexible(
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.visible,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Contact ',
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallScreen ? 28 : 32) : 48,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: 'Me',
-                      style: TextStyle(
-                        fontSize: isMobile ? 36 : 48,
-                        fontWeight: FontWeight.bold,
-                        foreground: Paint()
-                          ..shader = const LinearGradient(
-                            colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
-                          ).createShader(
-                            const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
-                          ),
+                      TextSpan(
+                        text: 'Me',
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallScreen ? 28 : 32) : 48,
+                          fontWeight: FontWeight.bold,
+                          foreground: Paint()
+                            ..shader = const LinearGradient(
+                              colors: [Color(0xFF6C63FF), Color(0xFF9C88FF)],
+                            ).createShader(
+                              const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                            ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
-              SizedBox(
-                width: isMobile ? double.infinity : 600,
-                child: const Text(
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: isMobile ? double.infinity : 600,
+                ),
+                child: Text(
                   'Ready to bring your ideas to life? Let\'s discuss your next project',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: isMobile ? (isSmallScreen ? 16 : 18) : 18,
                     color: Colors.white70,
                     height: 1.6,
                   ),
@@ -131,7 +143,7 @@ class _ContactSectionState extends State<ContactSection> {
             ],
           ),
 
-          const SizedBox(height: 80),
+          SizedBox(height: isSmallScreen ? 40 : 80),
 
           // Contact Content
           isMobile ? _buildMobileLayout() : _buildDesktopLayout(),
@@ -206,10 +218,10 @@ class _ContactSectionState extends State<ContactSection> {
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.05),
+                  color: Colors.white.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                   ),
                 ),
                 child: Row(
@@ -273,10 +285,10 @@ class _ContactSectionState extends State<ContactSection> {
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withValues(alpha: 0.1),
         ),
       ),
       child: Form(
@@ -371,7 +383,7 @@ class _ContactSectionState extends State<ContactSection> {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF6C63FF).withOpacity(0.3),
+                    color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -431,14 +443,14 @@ class _ContactSectionState extends State<ContactSection> {
         labelStyle: const TextStyle(color: Colors.white70),
         prefixIcon: Icon(icon, color: const Color(0xFF6C63FF)),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.05),
+        fillColor: Colors.white.withValues(alpha: 0.05),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
