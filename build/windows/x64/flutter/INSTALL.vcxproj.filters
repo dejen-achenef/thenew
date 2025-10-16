@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\dejen\OneDrive\Desktop\real_porfolio\portfolio_flutter\build\windows\x64\CMakeFiles\8be747e599541bc35dd5e45e6db04911\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6C4251F8-15C1-37C8-A9AF-1E65D131FE55}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+^C:\USERS\DEJEN\ONEDRIVE\DESKTOP\REAL_PORFOLIO\PORTFOLIO_FLUTTER\BUILD\WINDOWS\X64\CMAKEFILES\F05B94DF7E57D2EE5A44AB001CA51AC0\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
