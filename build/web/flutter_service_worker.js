@@ -3,13 +3,14 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "b2f289c6f920b9dd28d1b424ccd4d5b4",
-"assets/AssetManifest.bin.json": "5cc8a2b71c46f150ac332579d7b21a7d",
-"assets/AssetManifest.json": "e6413f3b3c7e4aa97e005b760ceab74c",
+const RESOURCES = {"assets/AssetManifest.bin": "43fa7793fa1ea082561838ae24a69af7",
+"assets/AssetManifest.bin.json": "ce48e822f358553da42640b4f163ef46",
+"assets/AssetManifest.json": "9ed5d49f7ad8cc1826e114d5ef16011e",
 "assets/assets/images/2e3bf33dd29c796ce504fd6389e8cb7c.jpg": "748597e5eebf35d142b8bf7f3142e365",
 "assets/assets/images/amazonLogo.jpg": "ad0b091e6651c1031ca6f501b3b665b4",
 "assets/assets/images/apple-touch-icon.png": "8379572b85036c82e041589cee6d943f",
 "assets/assets/images/dashbord.png": "e07e48579867f6f0d71c4d6de1fe83c2",
+"assets/assets/images/dejen-CV.pdf": "6295152fd915cb79e7af87f991d7217c",
 "assets/assets/images/dejen.png": "3b0c64c55030aec42e0a60cd94a31565",
 "assets/assets/images/dtech_marketplace.png": "b1ab2dbd2f0deb1f22403e2a2744d5b8",
 "assets/assets/images/favicon%2520(1).ico": "e5b5cfa045860d03125bf7cff8e4ebd6",
@@ -76,14 +77,14 @@ const RESOURCES = {"assets/AssetManifest.bin": "b2f289c6f920b9dd28d1b424ccd4d5b4
 "canvaskit/skwasm.worker.js": "89990e8c92bcb123999aa81f7e203b1c",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "flutter.js": "4b2350e14c6650ba82871f60906437ea",
-"flutter_bootstrap.js": "6ded23a8a9685abc95a61d991b01299f",
+"flutter_bootstrap.js": "8d778fffbcc05ef2c6fee0dc19cd54f1",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "index.html": "a2deff23a3893dad4ec2356f58362cef",
 "/": "a2deff23a3893dad4ec2356f58362cef",
-"main.dart.js": "7862a10016efc5f35a8932e29892e288",
+"main.dart.js": "3bfcc92dca976d3c64b926a9da9b5658",
 "manifest.json": "75ddf561701309cd388dc71fbe615148",
 "version.json": "7804eb643eb875d188221832d4ff86c5"};
 // The application shell files that are downloaded before a service worker can

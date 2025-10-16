@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
+import 'dart:html' as html;
 
 class AboutSection extends StatefulWidget {
   const AboutSection({super.key});
@@ -382,7 +385,7 @@ class _AboutSectionState extends State<AboutSection> {
             child: InkWell(
               borderRadius: BorderRadius.circular(30),
               onTap: () {
-                // Handle CV download
+                _downloadCV();
               },
               child: const Center(
                 child: Row(
@@ -410,6 +413,49 @@ class _AboutSectionState extends State<AboutSection> {
         ),
       ],
     );
+  }
+
+  Future<void> _downloadCV() async {
+    try {
+      // For web, use dart:html to trigger download
+      final String cvUrl = '/assets/assets/images/dejen-CV.pdf';
+
+      // Create an anchor element and trigger download
+      html.AnchorElement anchorElement = html.AnchorElement(href: cvUrl);
+      anchorElement.download = 'Dejen_Achenef_CV.pdf';
+      anchorElement.click();
+
+      // Show success message
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('CV download started!'),
+            backgroundColor: Color(0xFF6C63FF),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      // Fallback: try url_launcher
+      try {
+        final Uri url = Uri.parse('/assets/assets/images/dejen-CV.pdf');
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url, mode: LaunchMode.externalApplication);
+        } else {
+          throw Exception('Cannot launch URL');
+        }
+      } catch (fallbackError) {
+        // Show error message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Unable to download CV. Please try again.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    }
   }
 
   @override
