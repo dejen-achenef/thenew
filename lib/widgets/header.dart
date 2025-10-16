@@ -19,7 +19,7 @@ class _HeaderState extends State<Header> {
     {'id': 2, 'icon': Icons.settings, 'text': 'Services'},
     {'id': 3, 'icon': Icons.code, 'text': 'Skills'},
     {'id': 4, 'icon': Icons.folder, 'text': 'Portfolio'},
-    {'id': 5, 'icon': Icons.email, 'text': 'Contact'},
+    {'id': 6, 'icon': Icons.email, 'text': 'Contact'},
   ];
 
   @override

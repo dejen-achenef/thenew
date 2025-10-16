@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
@@ -10,7 +11,7 @@ class ContactSection extends StatefulWidget {
 class _ContactSectionState extends State<ContactSection> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _contactController = TextEditingController(); // Telegram or LinkedIn
   final _subjectController = TextEditingController();
   final _messageController = TextEditingController();
 
@@ -37,21 +38,90 @@ class _ContactSectionState extends State<ContactSection> {
     },
   ];
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
-      // Handle form submission
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Message sent successfully!'),
-          backgroundColor: Color(0xFF6C63FF),
-        ),
-      );
+      try {
+        // Prepare email content
+        final String name = _nameController.text.trim();
+        final String contact = _contactController.text.trim();
+        final String subject = _subjectController.text.trim();
+        final String message = _messageController.text.trim();
 
-      // Clear form
-      _nameController.clear();
-      _emailController.clear();
-      _subjectController.clear();
-      _messageController.clear();
+        // Create mailto URL with pre-filled content
+        final String emailBody = '''
+Hello Dejen,
+
+I hope this message finds you well. I am reaching out regarding: $subject
+
+Message:
+$message
+
+Contact Information:
+Name: $name
+Telegram/LinkedIn: $contact
+
+I look forward to hearing from you!
+
+Best regards,
+$name
+''';
+
+        final Uri emailUri = Uri(
+          scheme: 'mailto',
+          path: 'dejenacheneffentedese@gmail.com',
+          query: Uri.encodeComponent('subject') +
+              '=' +
+              Uri.encodeComponent(subject) +
+              '&' +
+              Uri.encodeComponent('body') +
+              '=' +
+              Uri.encodeComponent(emailBody),
+        );
+
+        // Launch email client
+        if (await canLaunchUrl(emailUri)) {
+          await launchUrl(emailUri);
+
+          // Show success message
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Email client opened! Please send the message.'),
+                backgroundColor: Color(0xFF6C63FF),
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
+
+          // Clear form after successful launch
+          _nameController.clear();
+          _contactController.clear();
+          _subjectController.clear();
+          _messageController.clear();
+        } else {
+          // Fallback: show contact info
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Please email: dejenacheneffentedese@gmail.com'),
+                backgroundColor: Color(0xFF6C63FF),
+                duration: Duration(seconds: 4),
+              ),
+            );
+          }
+        }
+      } catch (e) {
+        // Show error message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Error opening email client. Please try again.'),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 3),
+            ),
+          );
+        }
+      }
     }
   }
 
@@ -321,19 +391,15 @@ class _ContactSectionState extends State<ContactSection> {
 
             const SizedBox(height: 20),
 
-            // Email Field
+            // Contact Field (Telegram or LinkedIn)
             _buildTextField(
-              controller: _emailController,
-              label: 'Email',
-              icon: Icons.email,
-              keyboardType: TextInputType.emailAddress,
+              controller: _contactController,
+              label: 'Telegram or LinkedIn Username',
+              icon: Icons.contact_page,
+              keyboardType: TextInputType.text,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                }
-                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                    .hasMatch(value)) {
-                  return 'Please enter a valid email';
+                  return 'Please enter your Telegram or LinkedIn username';
                 }
                 return null;
               },
@@ -471,7 +537,7 @@ class _ContactSectionState extends State<ContactSection> {
   @override
   void dispose() {
     _nameController.dispose();
-    _emailController.dispose();
+    _contactController.dispose();
     _subjectController.dispose();
     _messageController.dispose();
     super.dispose();
