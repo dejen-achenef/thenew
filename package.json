@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-flutter",
+  "version": "1.0.0",
+  "description": "Dejen's Full Stack Developer Portfolio",
+  "scripts": {
+    "build": "flutter build web --release",
+    "dev": "flutter run -d chrome --web-port 3000",
+    "clean": "flutter clean"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
