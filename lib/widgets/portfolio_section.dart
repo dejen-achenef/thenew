@@ -70,7 +70,7 @@ class _PortfolioSectionState extends State<PortfolioSection> {
       'technologies': ['Flutter', 'Firebase', 'WebRTC'],
       'codeUrl': 'Coming Soon',
       'liveUrl': 'Coming Soon',
-      'image': 'assets/images/chatapp.png.png',
+      'image': 'assets/images/chatapp.png',
     },
     {
       'title': 'Renter Mobile App',
@@ -80,7 +80,7 @@ class _PortfolioSectionState extends State<PortfolioSection> {
       'technologies': ['Flutter', 'Firebase', 'Google Maps', 'Stripe'],
       'codeUrl': 'Coming Soon',
       'liveUrl': 'Coming Soon',
-      'image': 'assets/images/rent.png.webp',
+      'image': 'assets/images/rent.png',
     },
   ];
 
