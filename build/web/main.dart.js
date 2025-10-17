@@ -6905,7 +6905,7 @@ if(r==null)r=3
 s=b==null?null:b.a
 r=A.S(r,s==null?3:s,c)
 r.toString
-return B.np[A.aJv(B.c.aF(r),0,8)]},
+return B.nq[A.aJv(B.c.aF(r),0,8)]},
 aso(a,b,c){var s=a==null,r=s?null:a.a,q=b==null
 if(r==(q?null:b.a))s=s&&q
 else s=!0
@@ -32852,11 +32852,11 @@ gai1(){var s=this.a
 if(s instanceof A.ej)return s
 return this.a=new A.ej(s)},
 gajk(){var s,r,q,p,o,n=this
-if(n.c===1)return B.nr
+if(n.c===1)return B.ns
 s=n.d
 r=J.aD(s)
 q=r.gC(s)-J.cM(n.e)-n.f
-if(q===0)return B.nr
+if(q===0)return B.ns
 p=[]
 for(o=0;o<q;++o)p.push(r.h(s,o))
 p.$flags=3
@@ -51279,7 +51279,7 @@ p=h.gmi(0)
 o=h.r
 o=o==null?g:o*a2+a1
 n=h.w
-n=n==null?g:B.np[B.j.hm(n.a,0,8)]
+n=n==null?g:B.nq[B.j.hm(n.a,0,8)]
 m=h.y
 m=m==null?g:m+0
 l=h.z
@@ -52043,8 +52043,8 @@ s=r.Y
 r.eR=s==null?null:s.gH3()
 a.a=!1},
 oC(a,b,c){var s,r,q,p,o=this
-o.fb=A.atS(o.fb,B.ns)
-o.fc=A.atS(o.fc,B.ns)
+o.fb=A.atS(o.fb,B.nt)
+o.fc=A.atS(o.fc,B.nt)
 s=o.fb
 r=s!=null&&!s.ga1(s)
 s=o.fc
@@ -61161,8 +61161,8 @@ I(){return"SmartDashesType."+this.b}}
 A.ab8.prototype={
 I(){return"SmartQuotesType."+this.b}}
 A.t2.prototype={
-nt(){return A.aj(["name","TextInputType."+B.nq[this.a],"signed",this.b,"decimal",this.c],t.N,t.z)},
-k(a){return"TextInputType(name: "+("TextInputType."+B.nq[this.a])+", signed: "+A.m(this.b)+", decimal: "+A.m(this.c)+")"},
+nt(){return A.aj(["name","TextInputType."+B.nr[this.a],"signed",this.b,"decimal",this.c],t.N,t.z)},
+k(a){return"TextInputType(name: "+("TextInputType."+B.nr[this.a])+", signed: "+A.m(this.b)+", decimal: "+A.m(this.c)+")"},
 j(a,b){if(b==null)return!1
 return b instanceof A.t2&&b.a===this.a&&b.b==this.b&&b.c==this.c},
 gB(a){return A.J(this.a,this.b,this.c,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a)}}
@@ -79116,9 +79116,9 @@ s.av()}}
 A.yp.prototype={
 ac(){return new A.R6()}}
 A.R6.prototype={
-gKa(){if(this.d==="All")return B.nt
+gKa(){if(this.d==="All")return B.np
 var s=t.w_
-return A.a0(new A.aW(B.nt,new A.aiE(this),s),!0,s.i("k.E"))},
+return A.a0(new A.aW(B.np,new A.aiE(this),s),!0,s.i("k.E"))},
 L(a){var s,r,q,p,o,n,m=null,l=t.w,k=A.ba(a,m,l).w.a.a<768,j=A.ba(a,m,l).w.a.b<600
 l=j?30:40
 s=k?16:24
@@ -83521,18 +83521,31 @@ B.b4=new A.Ac(0,"rtl")
 B.al=new A.Ac(1,"ltr")
 B.jw=A.b(s([B.b4,B.al]),A.aB("A<Ac>"))
 B.no=A.b(s([0,0,32776,33792,1,10240,0,0]),t.t)
+B.dB={title:0,category:1,description:2,technologies:3,codeUrl:4,liveUrl:5,image:6}
+B.nk=A.b(s(["Flutter","Firebase","MongoDB"]),t.s)
+B.JE=new A.aE(B.dB,["DTech Marketplace","Web Apps","A comprehensive technology marketplace web application featuring secure payment processing, advanced user management, and an intuitive admin dashboard. Built with Flutter Web to deliver exceptional shopping experiences and robust backend functionality for tech products and services.",B.nk,"https://github.com/dejen-achenef/DTech_Marketplace","https://d-tech-marketplace-8olq-jjvwo26j3-dejens-projects-ae0a9fba.vercel.app","assets/images/dtech_marketplace.png"],t.R)
+B.HT=A.b(s(["Flutter","Firebase","Express.js","MongoDB"]),t.s)
+B.JC=new A.aE(B.dB,["Wonder Tutor","Mobile Apps","A comprehensive mobile learning platform connecting students with expert tutors. Features video calls, interactive whiteboard, progress tracking, and personalized learning paths for enhanced educational experiences. Coming soon to Play Store.",B.HT,"Coming Soon","Coming Soon to Play Store","assets/images/tutor.png"],t.R)
+B.GH=A.b(s(["Flutter","JavaScript","Firebase"]),t.s)
+B.JB=new A.aE(B.dB,["Personal Dashboard","Web Apps","A comprehensive personal productivity dashboard featuring real-time analytics, task management, and data visualization. Built with Flutter Web and JavaScript to provide users with insights into their daily activities and productivity metrics.",B.GH,"https://github.com/dejen-achenef/simple_dashboard","https://simple-dashboard-v6zi-bmqzx9mb4-dejens-projects-ae0a9fba.vercel.app/","assets/images/dashbord.png"],t.R)
+B.JD=new A.aE(B.dB,["Nike E-Commerce","Web Apps","A modern, responsive e-commerce web application for Nike products featuring advanced product catalog, seamless shopping cart, secure payment processing, and user authentication. Built with Flutter Web for optimal performance and user experience.",B.nk,"https://github.com/dejen-achenef/another_ecommerce","https://another-ecommerce-9kod.vercel.app/","assets/images/nike_e_commerce.png"],t.R)
+B.GG=A.b(s(["Flutter","Firebase","WebRTC"]),t.s)
+B.JA=new A.aE(B.dB,["Chat Application","Mobile Apps","A real-time messaging application with advanced features including group chats, file sharing, voice messages, and end-to-end encryption. Built with Flutter and Firebase for seamless communication across all devices with modern UI/UX design. Currently in development.",B.GG,"Coming Soon","Coming Soon","assets/images/chat_app.png"],t.R)
+B.GO=A.b(s(["Flutter","Firebase","Google Maps","Stripe"]),t.s)
+B.Jz=new A.aE(B.dB,["Renter Mobile App","Mobile Apps","A comprehensive property rental mobile application connecting landlords and tenants. Features include property listings, virtual tours, secure payments, maintenance requests, and real-time communication for seamless rental experiences. Currently in development.",B.GO,"Coming Soon","Coming Soon","assets/images/rent.png"],t.R)
+B.np=A.b(s([B.JE,B.JC,B.JB,B.JD,B.JA,B.Jz]),t.H7)
 B.hv={icon:0,title:1,value:2}
 B.JF=new A.aE(B.hv,[B.cD,"Email","dejenacheneffentedese@gmail.com"],t.R)
 B.JG=new A.aE(B.hv,[B.jp,"Phone","+251900604913"],t.R)
 B.JH=new A.aE(B.hv,[B.jn,"Location","Addis Ababa, Ethiopia"],t.R)
 B.JI=new A.aE(B.hv,[B.cc,"GitHub","github.com/dejen-achenef"],t.R)
 B.He=A.b(s([B.JF,B.JG,B.JH,B.JI]),t.H7)
-B.np=A.b(s([B.dp,B.h1,B.h2,B.o,B.K,B.aF,B.T,B.h3,B.ep]),A.aB("A<fI>"))
-B.nq=A.b(s(["text","multiline","number","phone","datetime","emailAddress","url","visiblePassword","name","address","none"]),t.s)
+B.nq=A.b(s([B.dp,B.h1,B.h2,B.o,B.K,B.aF,B.T,B.h3,B.ep]),A.aB("A<fI>"))
+B.nr=A.b(s(["text","multiline","number","phone","datetime","emailAddress","url","visiblePassword","name","address","none"]),t.s)
 B.Hf=A.b(s(["click","scroll"]),t.s)
 B.he=A.b(s([0,0,26498,1023,65534,34815,65534,18431]),t.t)
 B.Hu=A.b(s([]),t.QP)
-B.ns=A.b(s([]),A.aB("A<aLz>"))
+B.nt=A.b(s([]),A.aB("A<aLz>"))
 B.Hx=A.b(s([]),t.D)
 B.Hy=A.b(s([]),t.fJ)
 B.Hw=A.b(s([]),t.ER)
@@ -83547,7 +83560,7 @@ B.Hv=A.b(s([]),t.Lx)
 B.Hz=A.b(s([]),t.fm)
 B.Yb=A.b(s([]),t.p)
 B.Hp=A.b(s([]),t.t)
-B.nr=A.b(s([]),t.ee)
+B.ns=A.b(s([]),t.ee)
 B.HA=A.b(s([]),t.XS)
 B.zE=new A.FV(2,"outer")
 B.mf=new A.y(0.09803921568627451,0,0,0,B.e)
@@ -83565,19 +83578,6 @@ B.z7=new A.tu(2,"bottomLeft")
 B.WN=new A.kQ(B.z6,B.z7)
 B.WO=new A.kQ(B.z7,B.z6)
 B.HG=A.b(s([B.WM,B.WP,B.WN,B.WO]),A.aB("A<kQ>"))
-B.dB={title:0,category:1,description:2,technologies:3,codeUrl:4,liveUrl:5,image:6}
-B.nk=A.b(s(["Flutter","Firebase","MongoDB"]),t.s)
-B.JE=new A.aE(B.dB,["DTech Marketplace","Web Apps","A comprehensive technology marketplace web application featuring secure payment processing, advanced user management, and an intuitive admin dashboard. Built with Flutter Web to deliver exceptional shopping experiences and robust backend functionality for tech products and services.",B.nk,"https://github.com/dejen-achenef/DTech_Marketplace","https://d-tech-marketplace-8olq-jjvwo26j3-dejens-projects-ae0a9fba.vercel.app","assets/images/dtech_marketplace.png"],t.R)
-B.HT=A.b(s(["Flutter","Firebase","Express.js","MongoDB"]),t.s)
-B.JD=new A.aE(B.dB,["Wonder Tutor","Mobile Apps","A comprehensive mobile learning platform connecting students with expert tutors. Features video calls, interactive whiteboard, progress tracking, and personalized learning paths for enhanced educational experiences. Coming soon to Play Store.",B.HT,"Coming Soon","Coming Soon to Play Store","assets/images/tutor.png"],t.R)
-B.GH=A.b(s(["Flutter","JavaScript","Firebase"]),t.s)
-B.JA=new A.aE(B.dB,["Personal Dashboard","Web Apps","A comprehensive personal productivity dashboard featuring real-time analytics, task management, and data visualization. Built with Flutter Web and JavaScript to provide users with insights into their daily activities and productivity metrics.",B.GH,"https://github.com/dejen-achenef/simple_dashboard","https://simple-dashboard-v6zi-bmqzx9mb4-dejens-projects-ae0a9fba.vercel.app/","assets/images/dashbord.png"],t.R)
-B.Jz=new A.aE(B.dB,["Nike E-Commerce","Web Apps","A modern, responsive e-commerce web application for Nike products featuring advanced product catalog, seamless shopping cart, secure payment processing, and user authentication. Built with Flutter Web for optimal performance and user experience.",B.nk,"https://github.com/dejen-achenef/another_ecommerce","https://another-ecommerce-9kod.vercel.app/","assets/images/nike_ecommerce.png"],t.R)
-B.GG=A.b(s(["Flutter","Firebase","WebRTC"]),t.s)
-B.JC=new A.aE(B.dB,["Chat Application","Mobile Apps","A real-time messaging application with advanced features including group chats, file sharing, voice messages, and end-to-end encryption. Built with Flutter and Firebase for seamless communication across all devices with modern UI/UX design. Currently in development.",B.GG,"Coming Soon","Coming Soon","assets/images/dtech_marketplace.png"],t.R)
-B.GO=A.b(s(["Flutter","Firebase","Google Maps","Stripe"]),t.s)
-B.JB=new A.aE(B.dB,["Renter Mobile App","Mobile Apps","A comprehensive property rental mobile application connecting landlords and tenants. Features include property listings, virtual tours, secure payments, maintenance requests, and real-time communication for seamless rental experiences. Currently in development.",B.GO,"Coming Soon","Coming Soon","assets/images/dtech_marketplace.png"],t.R)
-B.nt=A.b(s([B.JE,B.JD,B.JA,B.Jz,B.JC,B.JB]),t.H7)
 B.du=new A.fV(0,"controlModifier")
 B.dv=new A.fV(1,"shiftModifier")
 B.dw=new A.fV(2,"altModifier")
