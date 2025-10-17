@@ -60,7 +60,7 @@ class _PortfolioSectionState extends State<PortfolioSection> {
       'technologies': ['Flutter', 'Firebase', 'MongoDB'],
       'codeUrl': 'https://github.com/dejen-achenef/another_ecommerce',
       'liveUrl': 'https://another-ecommerce-9kod.vercel.app/',
-      'image': 'assets/images/nike_ecommerce.png',
+      'image': 'assets/images/nike_e_commerce.png',
     },
     {
       'title': 'Chat Application',
@@ -70,7 +70,7 @@ class _PortfolioSectionState extends State<PortfolioSection> {
       'technologies': ['Flutter', 'Firebase', 'WebRTC'],
       'codeUrl': 'Coming Soon',
       'liveUrl': 'Coming Soon',
-      'image': 'assets/images/chatapp.png',
+      'image': 'assets/images/chat_app.png',
     },
     {
       'title': 'Renter Mobile App',
