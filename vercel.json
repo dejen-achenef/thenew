@@ -1,11 +1,7 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "build/web/**",
-      "use": "@vercel/static"
-    }
-  ],
+  "buildCommand": "flutter build web",
+  "outputDirectory": "build/web",
   "routes": [
     {
       "src": "/assets/(.*)",
@@ -23,6 +19,5 @@
       "src": "/(.*)",
       "dest": "/build/web/$1"
     }
-  ],
-  "outputDirectory": "build/web"
+  ]
 }
